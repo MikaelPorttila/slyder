@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { readdirSync } from "fs";
 
 console.log(
