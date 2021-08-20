@@ -1,3 +1,5 @@
+import { readdirSync } from "fs";
+
 console.log(
     "\x1b[32m",
     `
@@ -14,3 +16,11 @@ console.log(
                     "Y88P"                            
   `,
 );
+
+
+const targetDir = process.cwd();
+const files = readdirSync(targetDir);
+
+files.forEach((file) => {
+    console.log(file);
+});
