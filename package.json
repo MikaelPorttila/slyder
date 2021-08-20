@@ -4,7 +4,12 @@
   "description": "TBH",
   "main": "./lib/index.js",
   "scripts": {
+    "start": "nodemon",
+    "build": "esbuild ./src/index.ts --bundle --platform=node --outfile=lib/index.js",
     "test": "test"
+  },
+  "bin": {
+    "slyder": "./lib/index.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +23,15 @@
   "bugs": {
     "url": "https://github.com/MikaelPorttila/slyder/issues"
   },
-  "homepage": "https://github.com/MikaelPorttila/slyder#readme"
+  "homepage": "https://github.com/MikaelPorttila/slyder#readme",
+  "devDependencies": {
+    "@types/node": "^16.6.2",
+    "esbuild": "^0.12.21",
+    "nodemon": "^2.0.12",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "arg": "^5.0.1"
+  }
 }
