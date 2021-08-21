@@ -4,6 +4,7 @@ import { readdirSync, statSync, createReadStream } from 'fs';
 import handler from 'serve-handler';
 import { createServer } from 'http';
 import path from 'path';
+import open from 'open';
 
 console.log(
     "\x1b[32m",
@@ -21,6 +22,8 @@ console.log(
                     "Y88P"                            
   `,
 );
+
+const port = 4000;
 
 createServer((request, response) => {
   switch (request.url) {
@@ -45,4 +48,7 @@ createServer((request, response) => {
       return handler(request, response);
   }  
 })
-.listen(4000, () => { console.log('Presenting at http://localhost:4000'); });
+.listen(port, () => { 
+  console.log(`Presenting at http://localhost:${port}`);
+  open(`http://localhost:${port}`);
+});
