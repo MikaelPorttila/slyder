@@ -7,6 +7,7 @@ import path from 'path';
 import open from 'open';
 import { CommandArgs } from './command-args';
 import arg from "arg";
+import { lookup } from 'mime-types';
 
 console.log(
     "\x1b[32m",
@@ -80,7 +81,7 @@ createServer((request, response) => {
     if (existsSync(filePath)) {
       const fileInfo = statSync(filePath);
       response.writeHead(200, {
-        'Content-Type': 'text/html',
+        'Content-Type': lookup(path.basename(filePath)) as string,
         'Content-Length': fileInfo.size
       });
 

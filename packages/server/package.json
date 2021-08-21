@@ -19,6 +19,7 @@
     "test": "test"
   },
   "devDependencies": {
+    "@types/mime-types": "^2.1.1",
     "@types/node": "^16.6.2",
     "@types/serve-handler": "^6.1.1",
     "esbuild": "^0.12.21",
@@ -29,6 +30,7 @@
   },
   "dependencies": {
     "arg": "^5.0.1",
+    "mime-types": "^2.1.18",
     "open": "^8.2.1",
     "serve-handler": "^6.1.3"
   }

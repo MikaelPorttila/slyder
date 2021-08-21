@@ -6,19 +6,19 @@
   "homepage": "https://github.com/MikaelPorttila/slyder/tree/main/packages/client#readme",
   "license": "MIT",
   "scripts": {
-    "start": "parcel ./src/index.html",
-    "build": "parcel build ./src/index.html --dist-dir ../../lib --public-url ./client",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "old_start": "parcel ./src/index.html",
+    "old_build": "parcel build ./src/index.html --dist-dir ../../lib --public-url ./client",
+    "old_test": "echo \"Error: run tests from root\" && exit 1"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.0.0-rc.0",
-    "copyfiles": "^2.4.1",
-    "http-proxy-middleware": "^1.3.1",
-    "parcel": "*"
+    "vite": "^2.5.0",
+    "vite-plugin-solid": "^2.0.1"
   },
-  "browserslist": [
-    "defaults",
-    "not IE 11",
-    "maintained node versions"
-  ]
+  "dependencies": {
+    "solid-js": "^1.1.1"
+  }
 }

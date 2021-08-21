@@ -1,3 +1,8 @@
 {
-    "discord.enabled": true
+    "discord.enabled": true,
+    "files.exclude": {
+        "**/.parcel-cache": true,
+        "**/dist": true,
+        "**/node_modules": true
+    }
 }
