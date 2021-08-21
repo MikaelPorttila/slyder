@@ -1,11 +1,11 @@
 {
   "name": "slyder",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "TBH",
   "main": "./lib/index.js",
   "scripts": {
     "start": "nodemon",
-    "copy": "copyfiles -u 1 ./src/client/* ./lib",
+    "copy": "copyfiles -u 2 ./src/client/* ./lib",
     "bundle": "esbuild ./src/index.ts --bundle --platform=node --outfile=lib/index.js",
     "build": "npm run bundle && npm run copy",
     "test": "test"

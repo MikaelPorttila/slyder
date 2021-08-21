@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { readdirSync, statSync, createReadStream } from 'fs';
+import { readdirSync, statSync, createReadStream, existsSync } from 'fs';
 import handler from 'serve-handler';
 import { createServer } from 'http';
 import path from 'path';
@@ -28,9 +28,13 @@ const port = 4000;
 createServer((request, response) => {
   switch (request.url) {
     case '/':
-      const filePath = path.join(__dirname, '/client/index.html');
-      const fileInfo = statSync(filePath);
+      let filePath = path.join(__dirname, '/index.html');
+      if (!existsSync(filePath)) {
+        console.log('Debugging...');
+        filePath = path.join(__dirname, '/client/index.html'); 
+      }
 
+      const fileInfo = statSync(filePath);
       response.writeHead(200, {
         'Content-Type': 'text/html',
         'Content-Length': fileInfo.size
