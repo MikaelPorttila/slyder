@@ -1,0 +1,18 @@
+{
+  "name": "@slyder/common",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Mikael Porttila <mikael.porttila@gmail.com>",
+  "homepage": "https://github.com/MikaelPorttila/slyder/tree/main/packages/common#readme",
+  "license": "MIT",
+  "main": "lib/common.js",
+  "directories": {
+    "lib": "src"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}

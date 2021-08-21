@@ -1,0 +1,35 @@
+{
+  "name": "@slyder/server",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Mikael Porttila <mikael.porttila@gmail.com>",
+  "homepage": "https://github.com/MikaelPorttila/slyder/tree/main/packages/server#readme",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "directories": {
+    "lib": "src"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "start": "nodemon",
+    "bundle": "esbuild ./src/index.ts --bundle --platform=node --outfile=../../lib/index.js",
+    "build": "npm run bundle",
+    "test": "test"
+  },
+  "devDependencies": {
+    "@types/node": "^16.6.2",
+    "@types/serve-handler": "^6.1.1",
+    "esbuild": "^0.12.21",
+    "fs": "*",
+    "nodemon": "^2.0.12",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "arg": "^5.0.1",
+    "open": "^8.2.1",
+    "serve-handler": "^6.1.3"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "@slyder/client",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Mikael Porttila <mikael.porttila@gmail.com>",
+  "homepage": "https://github.com/MikaelPorttila/slyder/tree/main/packages/client#readme",
+  "license": "MIT",
+  "main": "lib/client.js",
+  "directories": {
+    "lib": "src"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build": "copyfiles -u 1 ./src/* ../../lib",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.4.1"
+  }
+}

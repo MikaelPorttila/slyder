@@ -34,13 +34,19 @@ createServer((request, response) => {
         filePath = path.join(__dirname, '/client/index.html'); 
       }
 
-      const fileInfo = statSync(filePath);
-      response.writeHead(200, {
-        'Content-Type': 'text/html',
-        'Content-Length': fileInfo.size
-      });
+      if (existsSync(filePath)) {
+        const fileInfo = statSync(filePath);
+        response.writeHead(200, {
+          'Content-Type': 'text/html',
+          'Content-Length': fileInfo.size
+        });
 
-      createReadStream(filePath).pipe(response);
+        createReadStream(filePath).pipe(response);
+      }
+      else {
+        response.writeHead(200);
+        response.end("Missing index.html");
+      }
     break;
     case '/data':
       const targetDir = process.cwd();

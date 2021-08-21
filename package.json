@@ -1,13 +1,11 @@
 {
   "name": "slyder",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "TBH",
   "main": "./lib/index.js",
   "scripts": {
-    "start": "nodemon",
-    "copy": "copyfiles -u 2 ./src/client/* ./lib",
-    "bundle": "esbuild ./src/index.ts --bundle --platform=node --outfile=lib/index.js",
-    "build": "npm run bundle && npm run copy",
+    "start": "lerna run start --parallel",
+    "build": "lerna run build --parallel",
     "test": "test"
   },
   "bin": {
@@ -27,18 +25,6 @@
   },
   "homepage": "https://github.com/MikaelPorttila/slyder#readme",
   "devDependencies": {
-    "@types/node": "^16.6.2",
-    "@types/serve-handler": "^6.1.1",
-    "copyfiles": "^2.4.1",
-    "esbuild": "^0.12.21",
-    "fs": "*",
-    "nodemon": "^2.0.12",
-    "ts-node": "^10.2.1",
-    "typescript": "^4.3.5"
-  },
-  "dependencies": {
-    "arg": "^5.0.1",
-    "open": "^8.2.1",
-    "serve-handler": "^6.1.3"
+    "lerna": "^4.0.0"
   }
 }
