@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
-import { readdirSync } from "fs";
+import { readdirSync, statSync, createReadStream } from 'fs';
+import handler from 'serve-handler';
+import { createServer } from 'http';
+import path from 'path';
 
 console.log(
     "\x1b[32m",
@@ -19,10 +22,27 @@ console.log(
   `,
 );
 
+createServer((request, response) => {
+  switch (request.url) {
+    case '/':
+      const filePath = path.join(__dirname, '/client/index.html');
+      const fileInfo = statSync(filePath);
 
-const targetDir = process.cwd();
-const files = readdirSync(targetDir);
+      response.writeHead(200, {
+        'Content-Type': 'text/html',
+        'Content-Length': fileInfo.size
+      });
 
-files.forEach((file) => {
-    console.log(file);
-});
+      createReadStream(filePath).pipe(response);
+    break;
+    case '/data':
+      const targetDir = process.cwd();
+      const files = readdirSync(targetDir);
+      response.writeHead(200, { 'Content-Type': 'application/json' });
+      response.end(JSON.stringify(files));
+    break;
+    default:
+      return handler(request, response);
+  }  
+})
+.listen(4000, () => { console.log('Presenting at http://localhost:4000'); });
