@@ -5,6 +5,8 @@ import handler from 'serve-handler';
 import { createServer } from 'http';
 import path from 'path';
 import open from 'open';
+import { CommandArgs } from './command-args';
+import arg from "arg";
 
 console.log(
     "\x1b[32m",
@@ -23,7 +25,31 @@ console.log(
   `,
 );
 
-const port = 4000;
+/* TODO: (Mikael) 
+  Add args:
+  - Port
+  - ignore files or dir
+  - skip
+  - order
+  - theme? (light/dark mode)
+  - browser?
+  - timer?
+  - control panel
+*/
+const argValues = arg({
+  // Arguments
+  '--port': Number,
+  [CommandArgs.Skip]: Number,
+  [CommandArgs.Order]: String,
+  [CommandArgs.Ignore]: String,
+  // Aliases
+  "-p": CommandArgs.Port,
+  "-i": CommandArgs.Ignore,
+  "-s": CommandArgs.Skip,
+  "-o": CommandArgs.Order
+});
+
+const port = argValues[CommandArgs.Port] || 4000;
 
 createServer((request, response) => {
   switch (request.url) {
