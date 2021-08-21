@@ -26,8 +26,7 @@ console.log(
 );
 
 /* TODO: (Mikael) 
-  Add args:
-  - Port
+  Handle args:
   - ignore files or dir
   - skip
   - order
@@ -56,7 +55,6 @@ createServer((request, response) => {
     case '/':
       let filePath = path.join(__dirname, '/index.html');
       if (!existsSync(filePath)) {
-        console.log('Debugging...');
         filePath = path.join(__dirname, '/client/index.html'); 
       }
 
@@ -74,11 +72,17 @@ createServer((request, response) => {
         response.end("Missing index.html");
       }
     break;
-    case '/data':
+    case '/api/data':
       const targetDir = process.cwd();
       const files = readdirSync(targetDir);
-      response.writeHead(200, { 'Content-Type': 'application/json' });
+      response.writeHead(200, {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+      });
       response.end(JSON.stringify(files));
+      console.log(`Served ${files?.length || 0} files`);
     break;
     default:
       return handler(request, response);

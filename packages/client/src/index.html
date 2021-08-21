@@ -5,24 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="TBH" />
     <title>Slyder 🚀</title>
-    <style>
-      .bg-dark {
-        background-color: #22223b;
-      }
-      .text-white {
-        color: #f2e9e4;
-      }
-    </style>
+    <link rel="stylesheet" href="./styles/main.scss">
   </head>
   <body class="bg-dark">
+    <h1>🚀</h1>
     <div id="Main" class="text-white"></div>
-    <script>
-      (async () => {
-        const files = await fetch('/data').then(x => x.json());
-        const main = document.querySelector('#Main');
-        main.innerHTML = files.reduce((res, file) => res + `<p>${file}</p>`, '');
-        console.log(files);
-      })();
-    </script>
+    <script src="./index.ts"></script>
   </body>
 </html>

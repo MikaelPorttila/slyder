@@ -1,10 +1,10 @@
 {
   "name": "slyder",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "TBH",
   "main": "./lib/index.js",
   "scripts": {
-    "start": "lerna run start --parallel",
+    "start": "lerna exec --parallel --scope @slyder/server --scope @slyder/client -- npm start",
     "build": "lerna run build --parallel",
     "test": "test"
   },

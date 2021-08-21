@@ -5,18 +5,20 @@
   "author": "Mikael Porttila <mikael.porttila@gmail.com>",
   "homepage": "https://github.com/MikaelPorttila/slyder/tree/main/packages/client#readme",
   "license": "MIT",
-  "main": "lib/client.js",
-  "directories": {
-    "lib": "src"
-  },
-  "files": [
-    "src"
-  ],
   "scripts": {
-    "build": "copyfiles -u 1 ./src/* ../../lib",
+    "start": "parcel ./src/index.html",
+    "build": "parcel build ./src/index.html --dist-dir ../../lib --public-url ./lib",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "devDependencies": {
-    "copyfiles": "^2.4.1"
-  }
+    "@parcel/transformer-sass": "^2.0.0-rc.0",
+    "copyfiles": "^2.4.1",
+    "http-proxy-middleware": "^1.3.1",
+    "parcel": "*"
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "maintained node versions"
+  ]
 }
