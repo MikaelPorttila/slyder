@@ -51,7 +51,62 @@ const argValues = arg({
 const port = argValues[CommandArgs.Port] || 4000;
 
 createServer((request, response) => {
-  switch (request.url) {
+
+  if (request.url === '/') {
+    let filePath = path.join(__dirname, '/index.html');
+      if (!existsSync(filePath)) {
+        filePath = path.join(__dirname, '/client/index.html'); 
+      }
+
+      if (existsSync(filePath)) {
+        const fileInfo = statSync(filePath);
+        response.writeHead(200, {
+          'Content-Type': 'text/html',
+          'Content-Length': fileInfo.size
+        });
+
+        createReadStream(filePath).pipe(response);
+      }
+      else {
+        response.writeHead(200);
+        response.end("Missing index.html");
+      }
+  }
+  else if(request.url?.startsWith('/client/')) {
+    const sectionLength = '/client/'.length;
+    let fileName = request.url.substring(sectionLength);
+    const filePath = path.join(__dirname, fileName);
+
+    if (existsSync(filePath)) {
+      const fileInfo = statSync(filePath);
+      response.writeHead(200, {
+        'Content-Type': 'text/html',
+        'Content-Length': fileInfo.size
+      });
+
+      createReadStream(filePath).pipe(response);
+    } else {
+      console.log('Missing client file', fileName, 'on path', filePath);
+    }
+  }
+  else if(request.url === '/api/data') {
+    const targetDir = process.cwd();
+      const files = readdirSync(targetDir);
+      response.writeHead(200, {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+      });
+      response.end(JSON.stringify(files));
+      console.log(`Served ${files?.length || 0} files`);
+  }
+  else {
+    // Serve current working forlder
+    return handler(request, response);
+  }
+
+  /* switch (request.url) {
     case '/':
       let filePath = path.join(__dirname, '/index.html');
       if (!existsSync(filePath)) {
@@ -85,8 +140,9 @@ createServer((request, response) => {
       console.log(`Served ${files?.length || 0} files`);
     break;
     default:
+      // Serve current working forlder
       return handler(request, response);
-  }  
+  }   */
 })
 .listen(port, () => { 
   console.log(`Presenting at http://localhost:${port}`);
