@@ -1,6 +1,6 @@
 import type { Presentation, Slide } from '../types';
 import { createContext, useContext } from "solid-js";
-import { createStore } from "solid-js/store";
+import { createStore, reconcile } from "solid-js/store";
 
 export type PresentationContext = [
     Presentation, 
@@ -41,7 +41,7 @@ export function PresentationContextProvider(props) {
                 setState("loading", () => false);
             },
             setCurrentSlide(slide: Slide) {
-                setState("currentSlide", () => slide);
+                setState("currentSlide", () => ({...slide}));
             }
         }
     ];
