@@ -1,21 +1,27 @@
-import type { Component } from "solid-js";
+import { Component, onMount } from "solid-js";
+import styles from "./App.module.css";
+import { Navigator, Projector } from './components';
+import { getPresentationContext } from "./context/presentation";
+import { Presentation, Slide } from "./types";
 
 const App: Component = () => {
-  loadData();
+  const [state, { setPresentation }] = getPresentationContext();
+  onMount(async () => {
+    const fileNames = await (await fetch('/api/data')).json() as string[];
+    setPresentation({
+      name: 'test',
+      loading: false,
+      length: fileNames.length,
+      slides: fileNames.map(x => ({ fileName: x })) as Slide[]
+    } as Presentation);
+  });
+
   return (
-    <div id="Main"></div>
+    <div class={styles.App}>
+      <Navigator></Navigator>
+      <Projector></Projector>
+    </div>
   );
 };
-
-const loadData = () => {
-  fetch('/api/data')
-      .then(x => x.json())
-      .then(files => {
-          console.log(files);
-          document
-              .querySelector('#Main')
-              .innerHTML = files.reduce((res, file) => res + `<p>${file}</p>`, '');
-      });
-}
 
 export default App;

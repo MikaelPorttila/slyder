@@ -1,7 +1,12 @@
 {
   "name": "slyder",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "TBH",
+  "workspaces": [
+    "packages/client",
+    "packages/@slyder/common",
+    "packages/@slyder/server"
+  ],
   "main": "./lib/index.js",
   "scripts": {
     "start": "npm run kill-ports && lerna exec --stream --scope @slyder/server --scope @slyder/client -- npm start",

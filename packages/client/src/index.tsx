@@ -1,6 +1,15 @@
 import { render } from "solid-js/web";
-
-import "./index.css";
+import { PresentationContextProvider } from './context/presentation';
 import App from "./App";
 
-render(() => <App />, document.getElementById("root"));
+import "./index.css";
+
+const Index = () => {
+    return (
+        <PresentationContextProvider>
+            <App />
+        </PresentationContextProvider>
+    );
+};
+
+render(Index, document.getElementById("root"));
