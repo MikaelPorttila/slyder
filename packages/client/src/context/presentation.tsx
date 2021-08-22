@@ -9,6 +9,8 @@ export type PresentationContext = [
         setSlides: (slides: Slide[]) => void;
         setPresentation: (presentation: Presentation) => void;
         setCurrentSlide: (slide: Slide) => void;
+        nextSlide: () => void;
+        previousSlide: () => void;
     }
 ];
 
@@ -22,7 +24,7 @@ export function PresentationContextProvider(props) {
         length: props.slides?.length || 0,
         startTime: props.startTime || new Date(),
         currentSlide: props.slides?.[0] || null
-    });
+    } as Presentation);
 
     const store: any = [
         state, 
@@ -42,6 +44,44 @@ export function PresentationContextProvider(props) {
             },
             setCurrentSlide(slide: Slide) {
                 setState("currentSlide", () => ({...slide}));
+            },
+            nextSlide() {
+                let slide;
+                const slideCount = state.slides?.length || 0;
+
+                if (slideCount > 0) {
+                    if (!state.currentSlide) {
+                        slide = state.slides[0];
+                    } else {
+                        const nextSlideIndex = (state.slides as Slide[]).findIndex(x => x.fileName === state.currentSlide.fileName) + 1;
+                        if (nextSlideIndex <= (slideCount - 1)) {
+                            slide = state.slides[nextSlideIndex];
+                        }
+                    }
+                }
+
+                if (slide) {
+                    setState("currentSlide", () => ({...slide}));
+                }
+            },
+            previousSlide() {
+                let slide;
+                const slideCount = state.slides?.length || 0;
+
+                if (slideCount > 0) {
+                    if (!state.currentSlide) {
+                        slide = state.slides[0];
+                    } else {
+                        const previousSlideIndex = (state.slides as Slide[]).findIndex(x => x.fileName === state.currentSlide.fileName) - 1;
+                        if (previousSlideIndex >= 0) {
+                            slide = state.slides[previousSlideIndex];
+                        }
+                    }
+                }
+
+                if (slide) {
+                    setState("currentSlide", () => ({...slide}));
+                }
             }
         }
     ];

@@ -16,12 +16,14 @@
     "kill-ports": "kill-port --port 3000"
   },
   "devDependencies": {
+    "@types/mousetrap": "^1.6.8",
     "kill-port": "^1.6.1",
     "vite": "^2.5.0",
     "vite-plugin-solid": "^2.0.1"
   },
   "dependencies": {
     "modern-normalize": "^1.1.0",
+    "mousetrap": "^1.6.5",
     "solid-js": "^1.1.1"
   }
 }

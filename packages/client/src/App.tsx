@@ -6,7 +6,7 @@ import { Presentation, Slide } from "./types";
 import { mapSlide } from './mappers/slide-mapper';
 
 const App: Component = () => {
-  const [state, { setPresentation }] = getPresentationContext();
+  const [, { setPresentation }] = getPresentationContext();
   onMount(async () => {
     const data: [] = await (await fetch('/api/data')).json();
     const slides = data.map(x => mapSlide(x));

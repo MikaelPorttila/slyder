@@ -14,10 +14,10 @@
     outline: none;
     border: none;
     transition: all 0.25s cubic-bezier(0.000, 1.370, 0.460, 1.650);
+    cursor: pointer;
 }
 
 .Slide:not(.active):hover {
-    cursor: pointer;
     border: none;
     outline: none;
     transform: scale3d(0.9, 0.9, 1); 
