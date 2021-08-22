@@ -11,11 +11,8 @@ export const Navigator: Component = () => {
         <div class={styles.Navigator}>
             <div>
                 <For each={state.slides} fallback={ <div>Loading</div> }>
-                    {(slide) =>
-                        <Slide slide={slide} ></Slide>
-                    }
+                    {(slide) => <Slide slide={slide} ></Slide> }
                 </For>
-                
             </div>
         </div>
     )

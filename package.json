@@ -1,6 +1,6 @@
 {
   "name": "slyder",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "TBH",
   "workspaces": [
     "packages/client",
@@ -9,11 +9,10 @@
   ],
   "main": "./lib/index.js",
   "scripts": {
-    "start": "npm run kill-ports && lerna exec --stream --scope @slyder/server --scope @slyder/client -- npm start",
+    "start": "lerna exec --stream --scope @slyder/server --scope @slyder/client -- npm start",
     "build": "npm run clear && lerna run build --parallel",
     "test": "test",
-    "clear": "rimraf lib",
-    "kill-ports": "kill-port --port 4000,3000"
+    "clear": "rimraf lib"
   },
   "bin": {
     "slyder": "./lib/index.js"
@@ -32,7 +31,6 @@
   },
   "homepage": "https://github.com/MikaelPorttila/slyder#readme",
   "devDependencies": {
-    "kill-port": "^1.6.1",
     "lerna": "^4.0.0",
     "rimraf": "^3.0.2"
   }

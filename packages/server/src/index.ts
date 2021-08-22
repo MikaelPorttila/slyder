@@ -91,7 +91,6 @@ createServer((request, response) => {
     }
   }
   else if(request.url === '/api/data') {
-    console.log('Incoming request');
     const targetDir = process.cwd();
       const files = readdirSync(targetDir)
       .map(fileName => ({
