@@ -1,6 +1,7 @@
 import type { Component } from "solid-js";
 import { Switch, Match, Show, onMount } from "solid-js"
 import { getPresentationContext } from '../context/presentation';
+import { ImageProjector } from './projectors/ImageProjector';
 import styles from "./Projector.module.css";
 import Mousetrap from 'mousetrap';
 
@@ -9,7 +10,7 @@ export const Projector: Component = () => {
 
     let projector;
     onMount(() => {
-        Mousetrap.bind(['l', 'f5'], (e, key) => {
+        Mousetrap.bind(['l', 'f5', 'f11'], (e) => {
             projector.requestFullscreen();
             e.preventDefault();
         });
@@ -22,7 +23,7 @@ export const Projector: Component = () => {
             <Show when={!state.loading && state.currentSlide}>
                 <Switch fallback={<>{ state.currentSlide.fileName }</>}>
                     <Match when={ state.currentSlide.type.startsWith('image/') }>
-                        <img src={state.currentSlide.fileName} title={state.currentSlide.fileName}></img>
+                        <ImageProjector slide={state.currentSlide}></ImageProjector>
                     </Match>
                 </Switch>
             </Show>

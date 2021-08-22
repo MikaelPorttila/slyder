@@ -1,12 +1,8 @@
 import type { Component } from "solid-js"
 import { Switch, Match } from "solid-js"
 import { getPresentationContext } from "../context/presentation";
-import type { Slide as SlideEntry } from './../types';
 import styles from "./Slide.module.css";
-
-interface SlideProps {
-    slide: SlideEntry
-}
+import type { SlideProps } from "./types/slide-props";
 
 export const Slide: Component<SlideProps> = (props) => {
     const [state, {setCurrentSlide}] = getPresentationContext();
