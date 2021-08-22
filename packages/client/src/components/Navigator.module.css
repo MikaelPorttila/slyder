@@ -5,4 +5,5 @@
     overflow: auto;
     overflow-x: hidden;
     padding: 1rem;
+    padding-right: 0;
 }

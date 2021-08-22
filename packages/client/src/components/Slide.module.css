@@ -10,17 +10,17 @@
     border-radius: 8px;
     border-spacing: border-box;
     padding: 1px;
-    cursor: pointer;
     display: block;
     outline: none;
     border: none;
+    transition: all 0.25s cubic-bezier(0.000, 1.370, 0.460, 1.650);
 }
 
-.Slide:hover {
+.Slide:not(.active):hover {
+    cursor: pointer;
     border: none;
     outline: none;
-    transform: scale3d(1.1, 1.1, 1);
-    transition: all 0.25s cubic-bezier(0.000, 1.370, 0.460, 1.650);
+    transform: scale3d(0.9, 0.9, 1); 
 }
 
 .Slide img {
@@ -32,4 +32,9 @@
 
 .Slide:last-of-type {
     margin-bottom: 0;
+}
+
+.active {
+    border: 2px solid rgb(74, 38, 204);
+    /* transform: scale3d(1.1, 1.1, 1); */
 }
