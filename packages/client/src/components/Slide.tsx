@@ -1,4 +1,5 @@
-import { Component, Switch, Match } from "solid-js"
+import type { Component } from "solid-js"
+import { Switch, Match } from "solid-js"
 import { getPresentationContext } from "../context/presentation";
 import type { Slide as SlideEntry } from './../types';
 import styles from "./Slide.module.css";
