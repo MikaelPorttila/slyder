@@ -12,9 +12,13 @@
     padding: 1px;
     cursor: pointer;
     display: block;
+    outline: none;
+    border: none;
 }
 
 .Slide:hover {
+    border: none;
+    outline: none;
     transform: scale3d(1.1, 1.1, 1);
     transition: all 0.25s cubic-bezier(0.000, 1.370, 0.460, 1.650);
 }
