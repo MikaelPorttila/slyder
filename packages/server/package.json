@@ -13,10 +13,11 @@
     "src"
   ],
   "scripts": {
-    "start": "nodemon",
+    "start": "npm run kill-ports && nodemon",
     "bundle": "esbuild ./src/index.ts --bundle --platform=node --outfile=../../lib/index.js",
     "build": "npm run bundle",
-    "test": "test"
+    "test": "test",
+    "kill-ports": "kill-port --port 4000"
   },
   "devDependencies": {
     "@types/mime-types": "^2.1.1",
@@ -24,6 +25,7 @@
     "@types/serve-handler": "^6.1.1",
     "esbuild": "^0.12.21",
     "fs": "*",
+    "kill-port": "^1.6.1",
     "nodemon": "^2.0.12",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.5"

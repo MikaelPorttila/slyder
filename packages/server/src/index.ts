@@ -81,7 +81,7 @@ createServer((request, response) => {
     if (existsSync(filePath)) {
       const fileInfo = statSync(filePath);
       response.writeHead(200, {
-        'Content-Type': lookup(path.basename(filePath)) as string,
+        'Content-Type': lookup(path.basename(filePath)) || 'application/octet-stream',
         'Content-Length': fileInfo.size
       });
 
@@ -91,8 +91,26 @@ createServer((request, response) => {
     }
   }
   else if(request.url === '/api/data') {
+    console.log('Incoming request');
     const targetDir = process.cwd();
-      const files = readdirSync(targetDir);
+      const files = readdirSync(targetDir)
+      .map(fileName => ({
+        fileName,
+        stat: statSync(path.join(targetDir, fileName))
+      }))
+      .filter(x => x.stat.isFile)
+      .map(file => {
+        let type;
+        try {
+          type = lookup(file.fileName) || 'application/octet-stream';
+        }
+        catch {
+          console.error('Failed to resolve mime for file', file.fileName);
+        }
+
+        return { fileName: file.fileName, type };
+      });
+
       response.writeHead(200, {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',

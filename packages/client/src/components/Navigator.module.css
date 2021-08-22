@@ -2,4 +2,6 @@
     background-color: #222;
     color: #aaa;
     text-align: center;
+    overflow: auto;
+    padding: 1rem;
 }

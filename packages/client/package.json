@@ -6,15 +6,17 @@
   "homepage": "https://github.com/MikaelPorttila/slyder/tree/main/packages/client#readme",
   "license": "MIT",
   "scripts": {
-    "start": "vite",
+    "start": "npm run kill-ports && vite",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
     "old_start": "parcel ./src/index.html",
     "old_build": "parcel build ./src/index.html --dist-dir ../../lib --public-url ./client",
-    "old_test": "echo \"Error: run tests from root\" && exit 1"
+    "old_test": "echo \"Error: run tests from root\" && exit 1",
+    "kill-ports": "kill-port --port 3000"
   },
   "devDependencies": {
+    "kill-port": "^1.6.1",
     "vite": "^2.5.0",
     "vite-plugin-solid": "^2.0.1"
   },
