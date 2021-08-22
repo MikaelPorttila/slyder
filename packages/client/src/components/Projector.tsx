@@ -4,6 +4,8 @@ import { getPresentationContext } from '../context/presentation';
 export const Projector: Component = () => {
     const [state, {}] = getPresentationContext();
     return (
-        <div class="projector"></div>
+        <div class="projector">
+            current Slide: {state.currentSlide?.fileName}
+        </div>
     )
 }

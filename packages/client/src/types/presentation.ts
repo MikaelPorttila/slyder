@@ -6,4 +6,5 @@ export interface Presentation {
     slides: Slide[];
     length: number;
     startTime: Date;
+    currentSlide: Slide;
 }

@@ -8,6 +8,7 @@ export type PresentationContext = [
         setLoading: (value: boolean) => void;
         setSlides: (slides: Slide[]) => void;
         setPresentation: (presentation: Presentation) => void;
+        setCurrentSlide: (slide: Slide) => void;
     }
 ];
 
@@ -19,7 +20,8 @@ export function PresentationContextProvider(props) {
         name: props.name || 'Untitled',
         slides: props.slides || [],
         length: props.slides?.length || 0,
-        startTime: props.startTime || new Date()
+        startTime: props.startTime || new Date(),
+        currentSlide: props.slides?.[0] || null
     });
 
     const store: any = [
@@ -37,6 +39,9 @@ export function PresentationContextProvider(props) {
                 setState("slides", () => presentation.slides);
                 setState("length", () => presentation.slides?.length || 0);
                 setState("loading", () => false);
+            },
+            setCurrentSlide(slide: Slide) {
+                setState("currentSlide", () => slide);
             }
         }
     ];

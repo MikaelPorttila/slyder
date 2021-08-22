@@ -15,7 +15,8 @@ const App: Component = () => {
       name: 'test',
       loading: false,
       length: slides.length,
-      slides
+      slides,
+      currentSlide: slides?.[0]
     } as Presentation);
   });
 

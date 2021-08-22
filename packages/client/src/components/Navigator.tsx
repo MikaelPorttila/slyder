@@ -5,14 +5,21 @@ import { Slide } from './';
 import styles from "./Navigator.module.css";
 
 export const Navigator: Component = () => {
-    const [state, {}] = getPresentationContext();
+    const [state, {setCurrentSlide}] = getPresentationContext();
 
     return (
         <div class={styles.Navigator}>
             <div>
                 <For each={state.slides} fallback={ <div>Loading</div> }>
-                    {(slide) => <Slide slide={slide}></Slide>}
+                    {(slide) =>
+                        <Slide
+                            onClick={(e) => console.log(e.currentTarget)}
+                            /* onClick={() => setCurrentSlide(slide)} */
+                            slide={slide}
+                        ></Slide>
+                    }
                 </For>
+                
             </div>
         </div>
     )
