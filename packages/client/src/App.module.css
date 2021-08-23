@@ -1,21 +1,7 @@
-.App {
+.app {
     height: 100%;
     width: 100%;
     display: grid;
     grid-template-columns: 20rem auto;
     margin: 0;
 }
-
-body:fullscreen .App {
-    grid-template-columns: 0 auto;
-}
-
-html:fullscreen .App {
-    grid-template-columns: 0 auto;
-}
-
-*:fullscreen .App {
-    background-color: hotpink;
-    grid-template-columns: 0 auto;
-}
-

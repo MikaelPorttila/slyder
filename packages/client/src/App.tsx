@@ -21,7 +21,7 @@ const App: Component = () => {
   });
 
   return (
-    <div class={styles.App}>
+    <div class={styles.app}>
       <Navigator></Navigator>
       <Projector></Projector>
     </div>

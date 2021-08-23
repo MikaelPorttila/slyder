@@ -2,6 +2,7 @@
 
 :root {
   --bg: #333;
+  --text-color: #aaa;
   --primary-action-color: #eee;
   --primary-action-color-active: #fff;
 }
@@ -26,10 +27,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-body:fullscreen {
+/* body:fullscreen {
   --bg: red;
   background-color: var(--bg);
-}
+} */
 
 .h-full {
   height: 100%;

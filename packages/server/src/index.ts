@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { readdirSync, statSync, createReadStream, existsSync } from 'fs';
+import { readdirSync, statSync, createReadStream, existsSync, readFileSync } from 'fs';
 import handler from 'serve-handler';
 import { createServer } from 'http';
 import path from 'path';
@@ -95,11 +95,12 @@ createServer((request, response) => {
       const files = readdirSync(targetDir)
       .map(fileName => ({
         fileName,
-        stat: statSync(path.join(targetDir, fileName))
+        stat: statSync(path.join(targetDir, fileName)),
+        path: path.join(targetDir, fileName)
       }))
       .filter(x => x.stat.isFile)
       .map(file => {
-        let type;
+        let type = 'application/octet-stream';
         try {
           type = lookup(file.fileName) || 'application/octet-stream';
         }
@@ -107,7 +108,20 @@ createServer((request, response) => {
           console.error('Failed to resolve mime for file', file.fileName);
         }
 
-        return { fileName: file.fileName, type };
+        let data;
+        try {
+          const supportsDataLoad = [
+            'text/markdown'
+          ].some((supportedFileType) => supportedFileType === type);
+          
+          if (supportsDataLoad) {
+            data = readFileSync(file.path, 'utf8');
+          }
+        } catch {
+          console.error('Failed to load data from file', file.fileName);
+        }
+
+        return { fileName: file.fileName, type, data };
       });
 
       response.writeHead(200, {

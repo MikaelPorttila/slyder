@@ -4,21 +4,23 @@ import { getPresentationContext } from "../context/presentation";
 import styles from "./Slide.module.css";
 import type { SlideProps } from "./types/slide-props";
 
-export const Slide: Component<SlideProps> = (props) => {
+export const Slide: Component<SlideProps> = ({ slide }) => {
     const [state, {setCurrentSlide}] = getPresentationContext();
-    const { fileName, type } = props.slide;
     return (
         <button 
             type="button"
-            class={styles.Slide}
-            classList={{ [styles.active]: state?.currentSlide?.fileName === fileName }}
-            onClick={[setCurrentSlide, props.slide]}
+            class={styles.slide}
+            classList={{ [styles.active]: state?.currentSlide?.fileName === slide.fileName }}
+            onClick={[setCurrentSlide, slide]}
+            title={slide.fileName}
         >
-            <Switch fallback={<>{ fileName }</>}>
-                <Match when={ type.startsWith('image/') }>
-                    <img src={fileName} title={fileName}></img>
-                </Match>
-            </Switch>
+            <div class={styles.slide__thumbnail}>
+                <Switch fallback={<>📊</>}>
+                    <Match when={ slide.type.startsWith('image/') }>
+                        <img src={slide.fileName}></img>
+                    </Match>
+                </Switch>
+            </div>
         </button>
     );
 }
