@@ -1,6 +1,13 @@
 #!/usr/bin/env node
 
-import { readdirSync, statSync, createReadStream, existsSync, readFileSync } from 'fs';
+import { 
+  readdirSync,
+  statSync,
+  createReadStream,
+  existsSync,
+  readFileSync,
+  watch
+} from 'fs';
 import handler from 'serve-handler';
 import { createServer } from 'http';
 import path from 'path';
@@ -8,6 +15,7 @@ import open from 'open';
 import { CommandArgs } from './command-args';
 import arg from "arg";
 import { lookup } from 'mime-types';
+import { Server } from 'socket.io';
 
 console.log(
     "\x1b[32m",
@@ -50,9 +58,7 @@ const argValues = arg({
 });
 
 const port = argValues[CommandArgs.Port] || 4000;
-
-createServer((request, response) => {
-
+const server = createServer((request, response) => {
   if (request.url === '/') {
     let filePath = path.join(__dirname, '/index.html');
       if (!existsSync(filePath)) {
@@ -137,8 +143,16 @@ createServer((request, response) => {
     // Serve current working forlder
     return handler(request, response);
   }
-})
-.listen(port, () => { 
+});
+
+const io = new Server(server, {});
+
+watch(process.cwd(), (eventType, fileName,) => {
+  // Refresh
+  io.emit('data', { reload: true });
+});
+
+server.listen(port, () => { 
   console.log(`Presenting at http://localhost:${port}`);
   open(`http://localhost:${port}`);
 });

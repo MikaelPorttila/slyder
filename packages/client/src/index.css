@@ -27,11 +27,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-/* body:fullscreen {
-  --bg: red;
-  background-color: var(--bg);
-} */
-
 .h-full {
   height: 100%;
 }

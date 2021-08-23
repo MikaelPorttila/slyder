@@ -34,6 +34,7 @@
     "arg": "^5.0.1",
     "mime-types": "^2.1.18",
     "open": "^8.2.1",
-    "serve-handler": "^6.1.3"
+    "serve-handler": "^6.1.3",
+    "socket.io": "^4.1.3"
   }
 }
