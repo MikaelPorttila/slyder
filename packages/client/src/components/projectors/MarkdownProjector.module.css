@@ -8,3 +8,8 @@
     align-content: center;
     flex-wrap: wrap;
 }
+
+.markdownProjector code {
+    border-radius: 0.5rem;
+    background-color: rgb(54, 54, 54);
+}

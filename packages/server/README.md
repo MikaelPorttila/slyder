@@ -1,5 +1,10 @@
 # `@slyder/server`
 
-> TODO: description
-
 ## Usage
+```sh
+# Debug
+npm start 
+
+# Build
+npm run build
+```
