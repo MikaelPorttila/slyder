@@ -26,7 +26,10 @@ export const Slide: Component<SlideProps> = ({ slide }) => {
             <div class={styles.slide__thumbnail}>
                 <Switch fallback={<>📊</>}>
                     <Match when={ slide.type.startsWith('image/') }>
-                        <img src={slide.fileName}></img>
+                        <img 
+                            src={slide.fileName + `?instance=${state.presentationId}`}
+                            loading="eager"
+                        ></img>
                     </Match>
                 </Switch>
             </div>

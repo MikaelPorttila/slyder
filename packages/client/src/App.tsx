@@ -4,36 +4,36 @@ import { Navigator, Projector } from './components';
 import { getPresentationContext } from "./context/presentation";
 import { Presentation } from "./types";
 import { mapSlide } from './mappers/slide-mapper';
+import { mapTimeline } from './mappers/timeline-mapper';
 import { io } from "socket.io-client";
 
 const App: Component = () => {
-  const [, { setPresentation }] = getPresentationContext();
+  const [, { setPresentation, jumpTo }] = getPresentationContext();
   onMount(async () => {
     const loadPresentation = async () => {
       const data: [] = await (await fetch('/api/data')).json();
       const slides = data.map(x => mapSlide(x));
+      const timeline = mapTimeline(slides);
       setPresentation({
         name: 'test',
         loading: false,
         length: slides.length,
         slides,
-        currentSlide: slides?.[0]
+        timeline
       } as Presentation);
+      jumpTo(0);
+      console.table(timeline.entries)
     }
 
     const socket = io();
-
-    let fetchTimer;
+    let fetchDebounce;
     socket
       .on('data', (args) => {
         if (args.reload) {
-          if (fetchTimer) {
-            clearTimeout(fetchTimer);
+          if (fetchDebounce) {
+            clearTimeout(fetchDebounce);
           }
-          
-          fetchTimer = setTimeout(async () => {
-            await loadPresentation();
-          }, 200);
+          fetchDebounce = setTimeout(async () => await loadPresentation(), 200);
         }
       })
       .on("disconnect", () => socket.connect())

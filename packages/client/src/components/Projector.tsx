@@ -10,27 +10,28 @@ import styles from "./Projector.module.css";
 import Mousetrap from 'mousetrap';
 
 export const Projector: Component = () => {
-    const [state, {nextSlide, previousSlide}] = getPresentationContext();
+    const [state, {next, back}] = getPresentationContext();
 
     let projector;
     onMount(() => {
+        console.log('Projector mounted');
         Mousetrap.bind(['l', 'f5', 'f11'], (e) => {
             projector.requestFullscreen();
             e.preventDefault();
         });
-        Mousetrap.bind('right', () => nextSlide());
-        Mousetrap.bind('left', () => previousSlide());
+        Mousetrap.bind('right', () => next());
+        Mousetrap.bind('left', () => back());
     });
 
     return (
         <div ref={projector} class={styles.projector}>
             <Show when={!state.loading && state.currentSlide}>
-                <Switch fallback={<MetaProjector slide={state.currentSlide}></MetaProjector>}>
+                <Switch fallback={<MetaProjector presentationId={state.presentationId} slide={state.currentSlide}></MetaProjector>}>
                     <Match when={ state.currentSlide.type.startsWith('image/') }>
-                        <ImageProjector slide={state.currentSlide}></ImageProjector>      
+                        <ImageProjector presentationId={state.presentationId} slide={state.currentSlide}></ImageProjector>      
                     </Match>
                     <Match when={ state.currentSlide.type === 'text/markdown' }>
-                        <MarkdownProjector slide={state.currentSlide}></MarkdownProjector>      
+                        <MarkdownProjector presentationId={state.presentationId} slide={state.currentSlide}></MarkdownProjector>      
                     </Match>
                 </Switch>
             </Show>
