@@ -10,7 +10,7 @@ import styles from "./Projector.module.css";
 import Mousetrap from 'mousetrap';
 
 export const Projector: Component = () => {
-    const [state, {next, back}] = getPresentationContext();
+    const [state, {next, back, jumpTo}] = getPresentationContext();
 
     let projector;
     onMount(() => {
@@ -21,6 +21,8 @@ export const Projector: Component = () => {
         });
         Mousetrap.bind('right', () => next());
         Mousetrap.bind('left', () => back());
+        Mousetrap.bind('ctrl+right', () => jumpTo(state.timeline.length - 1));
+        Mousetrap.bind('ctrl+left', () => jumpTo(0));
     });
 
     return (
