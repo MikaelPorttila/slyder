@@ -4,7 +4,7 @@ import { getPresentationContext } from '../context/presentation';
 import { 
     MetaProjector,
     ImageProjector,
-    MarkdownProjector
+    HtmlProjector
 } from './projectors';
 import styles from "./Projector.module.css";
 import Mousetrap from 'mousetrap';
@@ -33,7 +33,7 @@ export const Projector: Component = () => {
                         <ImageProjector presentationId={state.presentationId} slide={state.currentSlide}></ImageProjector>      
                     </Match>
                     <Match when={ state.currentSlide.type === 'text/markdown' }>
-                        <MarkdownProjector presentationId={state.presentationId} slide={state.currentSlide}></MarkdownProjector>      
+                        <HtmlProjector presentationId={state.presentationId} slide={state.currentSlide}></HtmlProjector>      
                     </Match>
                 </Switch>
             </Show>

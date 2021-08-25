@@ -1,9 +1,9 @@
 import { MetaProjector } from './MetaProjector';
 import { ImageProjector } from './ImageProjector';
-import { MarkdownProjector } from './MarkdownProjector';
+import { HtmlProjector } from './HtmlProjector';
 
 export {
     MetaProjector,
     ImageProjector,
-    MarkdownProjector
+    HtmlProjector
 }

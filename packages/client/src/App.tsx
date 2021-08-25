@@ -2,27 +2,19 @@ import { Component, onMount } from "solid-js";
 import styles from "./App.module.css";
 import { Navigator, Projector } from './components';
 import { getPresentationContext } from "./context/presentation";
-import { Presentation } from "./types";
-import { mapSlide } from './mappers/slide-mapper';
-import { mapTimeline } from './mappers/timeline-mapper';
 import { io } from "socket.io-client";
+import { getPresentation } from "./services/content-service";
+import { TimelineEntry } from "./types/timeline";
 
 const App: Component = () => {
-  const [, { setPresentation, jumpTo }] = getPresentationContext();
+  const [state, { setPresentation, jumpTo }] = getPresentationContext();
   onMount(async () => {
     const loadPresentation = async () => {
-      const data: [] = await (await fetch('/api/data')).json();
+      const presentation = await getPresentation();
+      setPresentation(presentation);
+      /* const data: [] = await (await fetch('/api/data')).json();
       const slides = data.map(x => mapSlide(x));
-      const timeline = mapTimeline(slides);
-      setPresentation({
-        name: 'test',
-        loading: false,
-        length: slides.length,
-        slides,
-        timeline
-      } as Presentation);
-      jumpTo(0);
-      console.table(timeline.entries)
+      const timeline = mapTimeline(slides); */
     }
 
     const socket = io();
@@ -33,13 +25,30 @@ const App: Component = () => {
           if (fetchDebounce) {
             clearTimeout(fetchDebounce);
           }
-          fetchDebounce = setTimeout(async () => await loadPresentation(), 200);
+          fetchDebounce = setTimeout(async () => {
+            let previousTimeEntry: TimelineEntry;
+            if (state.timeline) {
+              previousTimeEntry = {...state.timeline.entries[state.timeline.position]};
+            }
+
+            await loadPresentation();
+
+            if (previousTimeEntry) {
+              const matchingEntries = state.timeline.entries.filter(x => x.slideId === previousTimeEntry.slideId);
+              const targetEntry = matchingEntries.find(entry => entry.position === previousTimeEntry.position) || matchingEntries?.[0]; 
+              
+              if (targetEntry) {
+                jumpTo(state.timeline.entries.indexOf(targetEntry));
+              }
+            }
+          }, 200);
         }
       })
       .on("disconnect", () => socket.connect())
       .connect();
       
       await loadPresentation();
+      jumpTo(0);
   });
 
   return (
