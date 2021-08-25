@@ -1,11 +1,14 @@
 export const enum Mime {
-    Markdown = "text/markdown"
+    Markdown = "text/markdown",
+    PlainText = "text/plain"
 }
 
 export const enum MimeGroup {
     Image = "image/",
     Video = "video/",
-    Audio = "audio/"
+    Audio = "audio/",
+    Text = "text/",
+    Application = "application/"
 }
 
 export const enum FileExtension {

@@ -1,8 +1,9 @@
 import type { Component } from "solid-js"
+import type { SlideProps } from "./types/slide-props";
 import { Switch, Match, createEffect } from "solid-js"
 import { getPresentationContext } from "../context/presentation";
+import { MimeGroup, Mime } from "../constants";
 import styles from "./Slide.module.css";
-import type { SlideProps } from "./types/slide-props";
 
 export const Slide: Component<SlideProps> = ({ slide }) => {
     const [state, {setCurrentSlide}] = getPresentationContext();
@@ -25,11 +26,20 @@ export const Slide: Component<SlideProps> = ({ slide }) => {
         >
             <div class={styles.slide__thumbnail}>
                 <Switch fallback={<>📊</>}>
-                    <Match when={ slide.type.startsWith('image/') }>
+                    <Match when={ slide.type.startsWith(MimeGroup.Image) }>
                         <img 
                             src={slide.fileName + `?instance=${state.presentationId}`}
                             loading="eager"
                         ></img>
+                    </Match>
+                    <Match when={ slide.type.startsWith(MimeGroup.Video) }>
+                        🎬
+                    </Match>
+                    <Match when={ slide.type == Mime.PlainText }>
+                        📑
+                    </Match>
+                    <Match when={ slide.type.startsWith(MimeGroup.Application) }>
+                        💾
                     </Match>
                 </Switch>
             </div>
