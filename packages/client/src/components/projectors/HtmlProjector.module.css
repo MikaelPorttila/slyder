@@ -12,4 +12,10 @@
 .htmlProjector code {
     border-radius: 0.5rem;
     background-color: rgb(54, 54, 54);
+    font-size: var(--presentation-text-size);
+}
+
+/* Edge cases */
+.htmlProjector h1 code {
+    --presentation-text-size: var(--header-1);
 }

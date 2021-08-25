@@ -1,16 +1,23 @@
 @import 'modern-normalize/modern-normalize.css';
 
 :root {
+
   --bg: #333;
   --text-color: #aaa;
   --primary-action-color: #eee;
   --primary-action-color-active: #fff;
+
+  --header-1: 4rem;
+  --header-2: 2rem;
+  --header-3: 1.8rem;
+  --presentation-text-size: 1.8rem;
 }
 
 html,
 body {
   height: 100%;
   width: 100%;
+  font-size: 100%;
 }
 
 body {
@@ -25,6 +32,18 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+h1 {
+  font-size: var(--header-1);
+}
+
+h2 {
+  font-size: var(--header-2);
+}
+
+h3 {
+  font-size: var(--header-3);
 }
 
 .h-full {
