@@ -1,7 +1,12 @@
 .projector {
-    background-color: var(--bg);
+    background-color: var(--presentation-bg);
     color: var(--text-color);
     width:100%;
     height: 100%;
     overflow: hidden;
+    overflow-wrap: anywhere;
+}
+
+.projector a, .projector a:visited {
+    color: var(--presentation-link-color);
 }

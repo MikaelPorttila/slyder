@@ -1,11 +1,13 @@
 import type { Component } from "solid-js";
 import { Switch, Match, Show, onMount } from "solid-js"
 import { getPresentationContext } from '../context/presentation';
+import { Mime, FileExtension, MimeGroup } from '../constants';
 import { 
     MetaProjector,
     ImageProjector,
-    HtmlProjector
-} from './projectors';
+    HtmlProjector,
+    FrameProjector
+} from "./projectors";
 import styles from "./Projector.module.css";
 import Mousetrap from 'mousetrap';
 
@@ -29,11 +31,14 @@ export const Projector: Component = () => {
         <div ref={projector} class={styles.projector}>
             <Show when={!state.loading && state.currentSlide}>
                 <Switch fallback={<MetaProjector presentationId={state.presentationId} slide={state.currentSlide}></MetaProjector>}>
-                    <Match when={ state.currentSlide.type.startsWith('image/') }>
+                    <Match when={ state.currentSlide.type.startsWith(MimeGroup.Image) }>
                         <ImageProjector presentationId={state.presentationId} slide={state.currentSlide}></ImageProjector>      
                     </Match>
-                    <Match when={ state.currentSlide.type === 'text/markdown' }>
+                    <Match when={ state.currentSlide.type === Mime.Markdown }>
                         <HtmlProjector presentationId={state.presentationId} slide={state.currentSlide}></HtmlProjector>      
+                    </Match>
+                    <Match when={ state.currentSlide.fileExtension.endsWith(FileExtension.Url) }>
+                        <FrameProjector presentationId={state.presentationId} slide={state.currentSlide}></FrameProjector>      
                     </Match>
                 </Switch>
             </Show>

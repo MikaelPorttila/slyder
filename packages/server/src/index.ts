@@ -54,7 +54,7 @@ const argValues = arg({
   "-p": CommandArgs.Port,
   "-i": CommandArgs.Ignore,
   "-s": CommandArgs.Skip,
-  "-o": CommandArgs.Order
+  "-o": CommandArgs.Order,
 });
 
 const port = argValues[CommandArgs.Port] || 4000;
@@ -106,6 +106,7 @@ const server = createServer((request, response) => {
       }))
       .filter(x => x.stat.isFile)
       .map(file => {
+        const fileExtension = path.extname(file.fileName);
         let type = 'application/octet-stream';
         try {
           type = lookup(file.fileName) || 'application/octet-stream';
@@ -117,8 +118,11 @@ const server = createServer((request, response) => {
         let data;
         try {
           const supportsDataLoad = [
-            'text/markdown'
-          ].some((supportedFileType) => supportedFileType === type);
+            'text/markdown',
+          ].some((supportedFileType) => supportedFileType === type) ||
+          [
+            '.url'
+          ].some((supportedExtension) => supportedExtension === fileExtension);
           
           if (supportsDataLoad) {
             data = readFileSync(file.path, 'utf8');
@@ -127,7 +131,7 @@ const server = createServer((request, response) => {
           console.error('Failed to load data from file', file.fileName);
         }
 
-        return { fileName: file.fileName, type, data };
+        return { fileName: file.fileName, type, data, fileExtension };
       });
 
       response.writeHead(200, {
@@ -136,7 +140,12 @@ const server = createServer((request, response) => {
         'Access-Control-Allow-Methods': 'GET',
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
       });
-      response.end(JSON.stringify(files));
+      response.end(JSON.stringify({
+        files,
+        commands: {
+          skip: argValues[CommandArgs.Skip] || 0 
+        }
+      }));
       console.log(`Served ${files?.length || 0} files`);
   }
   else {
@@ -145,9 +154,8 @@ const server = createServer((request, response) => {
   }
 });
 
-const io = new Server(server, {});
-
-watch(process.cwd(), (eventType, fileName,) => {
+const io = new Server(server);
+watch(process.cwd(), (eventType, fileName) => {
   // Refresh
   io.emit('data', { reload: true });
 });

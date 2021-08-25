@@ -11,6 +11,10 @@
   --header-2: 2rem;
   --header-3: 1.8rem;
   --presentation-text-size: 1.8rem;
+  --presentation-bg: #222;
+  --presentation-code-bg: rgb(54, 54, 54);
+
+  --presentation-link-color: #eee;
 }
 
 html,

@@ -3,18 +3,22 @@ import styles from "./App.module.css";
 import { Navigator, Projector } from './components';
 import { getPresentationContext } from "./context/presentation";
 import { io } from "socket.io-client";
-import { getPresentation } from "./services/content-service";
+import { getInitalData } from "./services/content-service";
 import { TimelineEntry } from "./types/timeline";
 
 const App: Component = () => {
-  const [state, { setPresentation, jumpTo }] = getPresentationContext();
+  const [state, { setPresentation, jumpTo  }] = getPresentationContext();
   onMount(async () => {
-    const loadPresentation = async () => {
-      const presentation = await getPresentation();
+    const loadPresentation = async (jumpToStart: boolean = false, executeCommands: boolean = false) => {
+      const [presentation, commands] = await getInitalData();
       setPresentation(presentation);
-      /* const data: [] = await (await fetch('/api/data')).json();
-      const slides = data.map(x => mapSlide(x));
-      const timeline = mapTimeline(slides); */
+
+      if (executeCommands && commands.skip && commands.skip > 0) {
+        jumpTo(commands.skip);
+      }
+      else if(jumpToStart) {
+        jumpTo(0);
+      }
     }
 
     const socket = io();
@@ -47,8 +51,7 @@ const App: Component = () => {
       .on("disconnect", () => socket.connect())
       .connect();
       
-      await loadPresentation();
-      jumpTo(0);
+      await loadPresentation(true, true);
   });
 
   return (

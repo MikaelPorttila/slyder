@@ -10,7 +10,7 @@ export type PresentationContext = [
         setCurrentSlide: (slide: Slide) => void;
         next: () => void;
         back: () => void;
-        jumpTo: (position: number) => void
+        jumpTo: (position: number) => void;
     }
 ];
 
@@ -70,7 +70,7 @@ export function PresentationContextProvider(props) {
             setCurrentSlide: (slide: Slide) => goToTimeEntry(state.timeline.entries.findIndex(entry => entry.slideId === slide.fileName)),
             next: () => goToTimeEntry(state.timeline.position + 1),
             back: () => goToTimeEntry(state.timeline.position - 1),
-            jumpTo: (position: number) => goToTimeEntry(position)
+            jumpTo: (position: number) => goToTimeEntry(position),
         }
     ];
 

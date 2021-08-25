@@ -1,7 +1,6 @@
 .htmlProjector {
     width: 100%;
     height: 100%;
-    background-color: #222;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -11,7 +10,7 @@
 
 .htmlProjector code {
     border-radius: 0.5rem;
-    background-color: rgb(54, 54, 54);
+    background-color: var(--presentation-code-bg);
     font-size: var(--presentation-text-size);
 }
 

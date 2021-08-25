@@ -1,18 +1,21 @@
 # `Slyder`
 
 ## Usage
+Run following command to present working directory:
 ```sh
-# Run following cmd to present working directory: 
 npx slyder
 ```
 
+## Prerequisite
+Node Version >= 16.1.0
+
 ## Keyboard shortcuts
-- F11, f5 or l = Present in fullscreen mode.
+- F11, F5 or l = Present in fullscreen mode.
 - Left/Right = Previous/Next.
 - Ctrl + Left = Jump to first slide.
 - Ctrl + Right = Jump to last slide.
 
 ## Supported file types
-* [x] Markdown
-* [x] Images
+* [x] Markdown (Code highlight support)
+* [x] Images (Work in progress)
 * [ ] Videos
