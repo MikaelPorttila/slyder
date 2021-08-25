@@ -18,4 +18,4 @@ Node Version >= 16.1.0
 ## Supported file types
 * [x] Markdown (Code highlight support)
 * [x] Images (Work in progress)
-* [ ] Videos
+* [x] Videos
