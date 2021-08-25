@@ -6,7 +6,8 @@ import {
     MetaProjector,
     ImageProjector,
     HtmlProjector,
-    FrameProjector
+    FrameProjector,
+    VideoProjector
 } from "./projectors";
 import styles from "./Projector.module.css";
 import Mousetrap from 'mousetrap';
@@ -39,6 +40,9 @@ export const Projector: Component = () => {
                     </Match>
                     <Match when={ state.currentSlide.fileExtension.endsWith(FileExtension.Url) }>
                         <FrameProjector presentationId={state.presentationId} slide={state.currentSlide}></FrameProjector>      
+                    </Match>
+                    <Match when={ state.currentSlide.type.startsWith(MimeGroup.Video) }>
+                        <VideoProjector presentationId={state.presentationId} slide={state.currentSlide}></VideoProjector>      
                     </Match>
                 </Switch>
             </Show>
