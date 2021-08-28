@@ -7,11 +7,11 @@ import styles from "./Slide.module.css";
 
 export const Slide: Component<SlideProps> = ({ slide }) => {
     const [state, {setCurrentSlide}] = getPresentationContext();
-    let slideElement;
+    let slideElement: HTMLButtonElement;
 
     createEffect(() => {
         if(state?.currentSlide?.fileName === slide.fileName && slideElement) {
-            (slideElement as any).scrollIntoViewIfNeeded();
+            slideElement.scrollIntoView({ behavior: 'smooth', block: "nearest", inline: "nearest" });
         }
     })
 
