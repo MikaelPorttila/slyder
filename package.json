@@ -11,9 +11,9 @@
   "scripts": {
     "start": "lerna exec --stream --scope @slyder/server --scope @slyder/client -- npm start",
     "build": "npm run clear && lerna run build --parallel",
+    "prepublish": "npm run build",
     "test": "test",
-    "clear": "rimraf lib",
-    "publish": "npm run build && npm publish"
+    "clear": "rimraf lib"
   },
   "bin": {
     "slyder": "./lib/index.js"
