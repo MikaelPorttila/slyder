@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./packages",
+    "paths": {
+      "@slyder/common": ["common/src"],
+      "@slyder/server": ["server/src"],
+      "@slyder/client": ["client/src"]
+    }
+  }
+}

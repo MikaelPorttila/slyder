@@ -1,4 +1,4 @@
-import type { Slide } from './slide';
+import type { Slide } from '@slyder/common';
 import type { Timeline } from './timeline';
 
 export interface Presentation {

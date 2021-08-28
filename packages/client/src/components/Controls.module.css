@@ -1,0 +1,6 @@
+.controls {
+    background-color: #222;
+    padding: 1rem;
+    border-radius: 1rem;
+    transition: var(--anim-curve);
+}

@@ -2,6 +2,8 @@ import type { Component } from "solid-js";
 import { Switch, Match, Show, onMount } from "solid-js"
 import { getPresentationContext } from '../context/presentation';
 import { Mime, FileExtension, MimeGroup } from '../constants';
+
+import { Controls } from './Controls';
 import { 
     MetaProjector,
     ImageProjector,
@@ -46,6 +48,9 @@ export const Projector: Component = () => {
                     </Match>
                 </Switch>
             </Show>
+            {/* <div class={styles.projectionControl}>
+                <Controls></Controls>
+            </div> */}
         </div>
     )
 }

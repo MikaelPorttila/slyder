@@ -1,4 +1,4 @@
-import type { Slide } from "../types";
+import type { Slide } from '@slyder/common';
 import { MimeGroup, Mime, FileExtension } from "../constants";
 
 // External parsers

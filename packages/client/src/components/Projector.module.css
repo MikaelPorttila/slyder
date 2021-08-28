@@ -5,8 +5,16 @@
     height: 100%;
     overflow: hidden;
     overflow-wrap: anywhere;
+    position: relative;
 }
 
 .projector a, .projector a:visited {
     color: var(--presentation-link-color);
+}
+
+.projectionControl {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform:translateX(-50%);
 }

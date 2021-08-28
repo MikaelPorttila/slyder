@@ -33,7 +33,7 @@
     display: block;
     outline: none;
     border: none;
-    transition: all 0.25s cubic-bezier(0.000, 1.370, 0.460, 1.650);
+    transition: var(--anim-curve);
     display: flex;
     justify-content: center;
     align-content: center;

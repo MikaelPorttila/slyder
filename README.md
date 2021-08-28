@@ -7,7 +7,7 @@ npx slyder
 ```
 
 ## Prerequisite
-Node Version >= 16.1.0
+Node Version >= 14.15.0
 
 ## Keyboard shortcuts
 - F11, F5 or l = Present in fullscreen mode.
