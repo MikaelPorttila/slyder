@@ -4,3 +4,4 @@ export type {
   Slide
 };
 
+export { SocketMessage } from './const';

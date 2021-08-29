@@ -16,6 +16,9 @@ import { CommandArgs } from './command-args';
 import arg from "arg";
 import { lookup } from 'mime-types';
 import { Server } from 'socket.io';
+import { SocketMessage } from '@slyder/common';
+
+console.log('load var from common lib', SocketMessage.Data);
 
 console.log(
     "\x1b[32m",

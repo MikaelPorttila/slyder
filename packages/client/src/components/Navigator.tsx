@@ -9,7 +9,7 @@ export const Navigator: Component = () => {
     return (
         <div class={styles.navigator}> 
             <For each={state.slides} fallback={<div>Loading</div>}>
-                {(slide) => <Slide presentationId={state.presentationId} slide={slide}></Slide> }
+                {(slide) => <Slide active={state?.currentSlide?.fileName === slide.fileName} presentationId={state.presentationId} slide={slide}></Slide> }
             </For>
         </div>
     )
