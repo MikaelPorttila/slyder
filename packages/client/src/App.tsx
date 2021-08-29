@@ -5,8 +5,10 @@ import { getPresentationContext } from "./context/presentation";
 import { io } from "socket.io-client";
 import { getInitalData } from "./services/content-service";
 import { TimelineEntry } from "./types/timeline";
+import { SocketMessage } from '@slyder/common';
 
 const App: Component = () => {
+  console.log('Tried to load common', SocketMessage?.Data);
   const [state, { setPresentation, jumpTo  }] = getPresentationContext();
   onMount(async () => {
     const loadPresentation = async (jumpToStart: boolean = false, executeCommands: boolean = false) => {
@@ -22,7 +24,7 @@ const App: Component = () => {
     }
 
     const socket = io();
-    let fetchDebounce;
+    let fetchDebounce: NodeJS.Timeout;
     socket
       .on('data', (args) => {
         if (args.reload) {
@@ -30,14 +32,14 @@ const App: Component = () => {
             clearTimeout(fetchDebounce);
           }
           fetchDebounce = setTimeout(async () => {
-            let previousTimeEntry: TimelineEntry;
+            let previousTimeEntry: TimelineEntry | undefined;
             if (state.timeline) {
               previousTimeEntry = {...state.timeline.entries[state.timeline.position]};
             }
 
             await loadPresentation();
 
-            if (previousTimeEntry) {
+            if (previousTimeEntry !== undefined && previousTimeEntry) {
               const matchingEntries = state.timeline.entries.filter(x => x.slideId === previousTimeEntry.slideId);
               const targetEntry = matchingEntries.find(entry => entry.position === previousTimeEntry.position) || matchingEntries?.[0]; 
               

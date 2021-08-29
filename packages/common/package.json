@@ -1,18 +1,23 @@
 {
   "name": "@slyder/common",
-  "version": "0.0.0",
-  "description": "> TODO: description",
+  "version": "1.0.0",
+  "description": "test",
+  "devDependencies": {},
+  "peerDependencies": {
+    "typescript": "^4.4.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Hallo from Common\""
+  },
   "author": "Mikael Porttila <mikael.porttila@gmail.com>",
   "homepage": "https://github.com/MikaelPorttila/slyder/tree/main/packages/common#readme",
   "license": "MIT",
-  "main": "lib/common.js",
+  "main": "src/index.ts",
   "directories": {
     "lib": "src"
   },
   "files": [
     "src"
-  ],
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  }
+  ]
 }
