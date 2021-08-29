@@ -17,6 +17,7 @@ import arg from "arg";
 import { lookup } from 'mime-types';
 import { Server } from 'socket.io';
 import { SocketMessage, ApiPath } from '@slyder/common';
+import { generateHttpsCert } from '@slyder/cert';
 
 console.log(
     "\x1b[32m",
@@ -57,6 +58,8 @@ const argValues = arg({
   "-s": CommandArgs.Skip,
   "-o": CommandArgs.Order,
 });
+
+generateHttpsCert();
 
 const port = argValues[CommandArgs.Port] || 4000;
 const server = createServer((request, response) => {

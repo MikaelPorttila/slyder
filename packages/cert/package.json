@@ -1,0 +1,25 @@
+{
+  "name": "@slyder/cert",
+  "version": "1.0.0",
+  "description": "test",
+  "devDependencies": {
+    "tsc-watch": "^4.5.0"
+  },
+  "peerDependencies": {
+    "typescript": "^4.4.2"
+  },
+  "scripts": {
+    "start": "tsc-watch -p ./tsconfig.json --noClear",
+    "build": "tsc"
+  },
+  "author": "Mikael Porttila <mikael.porttila@gmail.com>",
+  "homepage": "https://github.com/MikaelPorttila/slyder/tree/main/packages/common#readme",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "directories": {
+    "lib": "src"
+  },
+  "files": [
+    "src"
+  ]
+}
