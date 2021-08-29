@@ -8,6 +8,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "start": "npm run build -w @slyder/common && run-p start:*",
+    "start:common": "npm start -w @slyder/common",
     "start:server": "npm start -w @slyder/server",
     "start:client": "npm start -w @slyder/client",
     "build": "npm run clear && npm run build -w @slyder/common && npm run build -w @slyder/server && npm run build -w @slyder/client",

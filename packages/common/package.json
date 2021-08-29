@@ -2,13 +2,15 @@
   "name": "@slyder/common",
   "version": "1.0.0",
   "description": "test",
-  "devDependencies": {},
+  "devDependencies": {
+    "tsc-watch": "^4.5.0"
+  },
   "peerDependencies": {
     "typescript": "^4.4.2"
   },
   "scripts": {
-    "build": "tsc",
-    "test": "echo \"Hallo from Common\""
+    "start": "tsc-watch -p ./tsconfig.json --noClear",
+    "build": "tsc"
   },
   "author": "Mikael Porttila <mikael.porttila@gmail.com>",
   "homepage": "https://github.com/MikaelPorttila/slyder/tree/main/packages/common#readme",

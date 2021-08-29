@@ -19,7 +19,6 @@ export const Projector: Component = () => {
 
     let projector;
     onMount(() => {
-        console.log('Projector mounted');
         Mousetrap.bind(['l', 'f5', 'f11'], (e) => {
             projector.requestFullscreen();
             e.preventDefault();

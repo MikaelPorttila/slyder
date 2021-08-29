@@ -3,6 +3,7 @@
     "files.exclude": {
         "**/.parcel-cache": true,
         "**/dist": true,
+        "**/lib": true,
         "**/node_modules": true
     }
 }

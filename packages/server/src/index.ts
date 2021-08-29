@@ -16,9 +16,7 @@ import { CommandArgs } from './command-args';
 import arg from "arg";
 import { lookup } from 'mime-types';
 import { Server } from 'socket.io';
-import { SocketMessage } from '@slyder/common';
-
-console.log('load var from common lib', SocketMessage.Data);
+import { SocketMessage, ApiPath } from '@slyder/common';
 
 console.log(
     "\x1b[32m",
@@ -99,7 +97,7 @@ const server = createServer((request, response) => {
       console.log('Missing client file', fileName, 'on path', filePath);
     }
   }
-  else if(request.url === '/api/data') {
+  else if(request.url === ApiPath) {
     const targetDir = process.cwd();
       const files = readdirSync(targetDir)
       .map(fileName => ({
@@ -160,7 +158,7 @@ const server = createServer((request, response) => {
 const io = new Server(server);
 watch(process.cwd(), (eventType, fileName) => {
   // Refresh
-  io.emit('data', { reload: true });
+  io.emit(SocketMessage.Data, { reload: true });
 });
 
 server.listen(port, () => { 

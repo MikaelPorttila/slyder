@@ -4,11 +4,10 @@ import { Navigator, Projector } from './components';
 import { getPresentationContext } from "./context/presentation";
 import { io } from "socket.io-client";
 import { getInitalData } from "./services/content-service";
-import { TimelineEntry } from "./types/timeline";
+import type { TimelineEntry } from "./types/timeline";
 import { SocketMessage } from '@slyder/common';
 
 const App: Component = () => {
-  console.log('Tried to load common', SocketMessage?.Data);
   const [state, { setPresentation, jumpTo  }] = getPresentationContext();
   onMount(async () => {
     const loadPresentation = async (jumpToStart: boolean = false, executeCommands: boolean = false) => {
@@ -26,7 +25,7 @@ const App: Component = () => {
     const socket = io();
     let fetchDebounce: NodeJS.Timeout;
     socket
-      .on('data', (args) => {
+      .on(SocketMessage.Data, (args) => {
         if (args.reload) {
           if (fetchDebounce) {
             clearTimeout(fetchDebounce);
